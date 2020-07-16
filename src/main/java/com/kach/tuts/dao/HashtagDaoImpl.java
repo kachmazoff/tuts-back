@@ -13,7 +13,7 @@ public class HashtagDaoImpl implements HashtagDao {
     @Autowired
     private SessionFactory sessionFactory;
     @Override
-    public void create(String NameHashtag){
+    public void create(String nameHashtag){
 
     }
     @Override

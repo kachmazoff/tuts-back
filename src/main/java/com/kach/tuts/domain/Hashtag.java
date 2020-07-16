@@ -15,7 +15,7 @@ public class Hashtag {
     }
 
     public void setName(String name) {
-       if (name.length()<128 | name.length()>0) {
+       if (name.length()<128 || name.length()>0) {
            this.name = name;
        } else {
            throw new IllegalArgumentException();
