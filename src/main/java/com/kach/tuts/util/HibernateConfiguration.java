@@ -1,5 +1,6 @@
 package com.kach.tuts.util;
 
+import com.kach.tuts.domain.TutorialStep;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,8 +32,6 @@ public class HibernateConfiguration {
     @Value("${hibernate.show_sql}")
     private String SHOW_SQL;
 
-    @Value("${hibernate.hbm2ddl.auto}")
-    private String HBM2DDL_AUTO;
 
     @Bean
     public DataSource dataSource() {
@@ -44,6 +43,7 @@ public class HibernateConfiguration {
         return dataSource;
     }
 
+    //After creating new entity class add that into sessionFactory.setAnnotatedClasses
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -51,8 +51,8 @@ public class HibernateConfiguration {
         Properties hibernateProperties = new Properties();
         hibernateProperties.put("hibernate.dialect", DIALECT);
         hibernateProperties.put("hibernate.show_sql", SHOW_SQL);
-        hibernateProperties.put("hibernate.hbm2ddl.auto", HBM2DDL_AUTO);
         sessionFactory.setHibernateProperties(hibernateProperties);
+        sessionFactory.setAnnotatedClasses(TutorialStep.class);
 
         return sessionFactory;
     }

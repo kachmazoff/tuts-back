@@ -37,4 +37,9 @@ public class TutorialStepServiceImpl implements TutorialStepService {
     public List<TutorialStep> getAllTutorialSteps() {
         return this.tutorialStepDao.getAll();
     }
+
+    @Override
+    public void deleteTutorialStep(TutorialStep tutorialStep) {
+        this.tutorialStepDao.delete(tutorialStep);
+    }
 }

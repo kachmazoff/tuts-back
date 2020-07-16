@@ -19,10 +19,10 @@ public class TutorialStepDaoImpl implements TutorialStepDao {
     public TutorialStep save(TutorialStep tutorialStep) {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        TutorialStep newTutorialStep = (TutorialStep) session.save(tutorialStep);
+        session.save(tutorialStep);
         transaction.commit();
         session.close();
-        return newTutorialStep;
+        return tutorialStep;
     }
 
     @Override
@@ -53,6 +53,15 @@ public class TutorialStepDaoImpl implements TutorialStepDao {
         transaction.commit();
         session.close();
         return tutorialSteps;
+    }
+
+    @Override
+    public void delete(TutorialStep tutorialStep) {
+        Session session = this.sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(tutorialStep);
+        transaction.commit();
+        session.close();
     }
 
 

@@ -9,4 +9,5 @@ public interface TutorialStepService {
     void updateTutorialStep(TutorialStep tutorialStep);
     TutorialStep getTutorialStepById(int id);
     List<TutorialStep> getAllTutorialSteps();
+    void deleteTutorialStep(TutorialStep tutorialStep);
 }

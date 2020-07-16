@@ -10,4 +10,5 @@ public interface TutorialStepDao {
     void update(TutorialStep tutorialStep);
     TutorialStep getById(int id);
     List<TutorialStep> getAll();
+    void delete(TutorialStep tutorialStep);
 }
