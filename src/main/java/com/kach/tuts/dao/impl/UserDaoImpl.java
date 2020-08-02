@@ -1,67 +1,80 @@
 package com.kach.tuts.dao.impl;
 
-import com.kach.tuts.dao.TutorialDao;
-import com.kach.tuts.domain.Tutorial;
+import com.kach.tuts.dao.UserDao;
+import com.kach.tuts.domain.TutorialStep;
+import com.kach.tuts.domain.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-public class TutorialDaoImpl implements TutorialDao {
+public class UserDaoImpl implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public Tutorial save(Tutorial tutorial) {
+    public User save(User user) {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.save(tutorial);
+        session.save(user);
         transaction.commit();
         session.close();
-        return tutorial;
+        return user;
     }
 
     @Override
-    public void update(Tutorial tutorial) {
+    public void update(User user) {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.update(tutorial);
+        session.update(user);
         transaction.commit();
         session.close();
     }
 
     @Override
-    public Tutorial getById(Long id) {
+    public User getById(Long id) {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        Tutorial tutorial = session.get(Tutorial.class, id);
+        User user = session.get(User.class, id);
         transaction.commit();
         session.close();
-        return tutorial;
+        return user;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Tutorial> getAll() {
+    public List<User> getAll() {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        List<Tutorial> tutorials = session.createQuery("from Tutorial ").list();
+        List<User> users = session.createQuery("from User").list();
         transaction.commit();
         session.close();
-        return tutorials;
+        return users;
     }
 
     @Override
-    public void delete(Tutorial tutorial) {
+    public void delete(User user) {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.delete(tutorial);
+        session.delete(user);
         transaction.commit();
         session.close();
     }
-}
 
+    @Override
+    public void deleteByUsernameAndPassword(String username, String password) {
+        Session session = this.sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Query query = session.createQuery("delete from User where username = :username and password = :password");
+        query.setParameter("username", username);
+        query.setParameter("password", password);
+        query.executeUpdate();
+        transaction.commit();;
+        session.close();
+    }
+}
