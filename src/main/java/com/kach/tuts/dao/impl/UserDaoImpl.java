@@ -1,6 +1,7 @@
 package com.kach.tuts.dao.impl;
 
 import com.kach.tuts.dao.UserDao;
+import com.kach.tuts.domain.EntityStatus;
 import com.kach.tuts.domain.TutorialStep;
 import com.kach.tuts.domain.User;
 import org.hibernate.Session;
@@ -61,7 +62,11 @@ public class UserDaoImpl implements UserDao {
     public void delete(User user) {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.delete(user);
+        Query query = session.createQuery("update User set status = :status" +
+                " where username = :username");
+        query.setParameter("status", EntityStatus.DELETED);
+        query.setParameter("username", user.getUsername());
+        query.executeUpdate();
         transaction.commit();
         session.close();
     }
@@ -70,7 +75,9 @@ public class UserDaoImpl implements UserDao {
     public void deleteByUsernameAndPassword(String username, String password) {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("delete from User where username = :username and password = :password");
+        Query query = session.createQuery("update User set status = :status" +
+                " where username = :username and password = :password");
+        query.setParameter("status", EntityStatus.DELETED);
         query.setParameter("username", username);
         query.setParameter("password", password);
         query.executeUpdate();

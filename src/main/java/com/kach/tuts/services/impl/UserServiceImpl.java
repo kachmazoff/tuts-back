@@ -20,32 +20,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User delete(String login, String password) {
-        return null;
+    public void delete(String login, String password) {
+        userDao.deleteByUsernameAndPassword(login, password);
     }
 
     @Override
     public User save(User user) {
-        return null;
+        return userDao.save(user);
     }
 
     @Override
     public void update(User user) {
-
+        userDao.update(user);
     }
 
     @Override
     public User getById(Long id) {
-        return null;
+        return userDao.getById(id);
     }
 
     @Override
     public List<User> getAll() {
-        return null;
+        return userDao.getAll();
     }
 
     @Override
     public void delete(User user) {
-
+        userDao.delete(user);
     }
 }
