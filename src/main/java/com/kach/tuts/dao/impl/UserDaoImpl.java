@@ -50,6 +50,7 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
+
     @SuppressWarnings("unchecked")
     @Override
     public List<User> getAll() {
@@ -85,7 +86,16 @@ public class UserDaoImpl implements UserDao {
         query.setParameter("password", password);
         query.executeUpdate();
         transaction.commit();
-        ;
         session.close();
+    }
+
+    @Override
+    public User getByUsername(String username) {
+        Session session = this.sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        User user = (User) session.createQuery("from User where username = :username").uniqueResult();
+        transaction.commit();
+        session.close();
+        return user;
     }
 }
