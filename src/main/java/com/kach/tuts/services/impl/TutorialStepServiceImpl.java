@@ -10,10 +10,10 @@ import java.util.List;
 
 @Service
 public class TutorialStepServiceImpl implements TutorialStepService {
-    private TutorialStepDao tutorialStepDao;
+    private final TutorialStepDao tutorialStepDao;
 
     @Autowired
-    public void setTutorialStepDao(TutorialStepDao tutorialStepDao) {
+    public TutorialStepServiceImpl(TutorialStepDao tutorialStepDao) {
         this.tutorialStepDao = tutorialStepDao;
     }
 

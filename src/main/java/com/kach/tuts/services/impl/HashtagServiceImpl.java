@@ -10,10 +10,10 @@ import java.util.List;
 
 @Service
 public class HashtagServiceImpl implements HashtagService {
-    private HashtagDao hashtagDao;
+    private final HashtagDao hashtagDao;
 
     @Autowired
-    public void setHashtagDao(HashtagDao hashtagDao) {
+    public HashtagServiceImpl(HashtagDao hashtagDao) {
         this.hashtagDao = hashtagDao;
     }
 

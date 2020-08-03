@@ -2,7 +2,6 @@ package com.kach.tuts.dao.impl;
 
 import com.kach.tuts.dao.UserDao;
 import com.kach.tuts.domain.EntityStatus;
-import com.kach.tuts.domain.TutorialStep;
 import com.kach.tuts.domain.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,8 +14,12 @@ import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
+    private final SessionFactory sessionFactory;
+
     @Autowired
-    private SessionFactory sessionFactory;
+    public UserDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public User save(User user) {
@@ -81,7 +84,8 @@ public class UserDaoImpl implements UserDao {
         query.setParameter("username", username);
         query.setParameter("password", password);
         query.executeUpdate();
-        transaction.commit();;
+        transaction.commit();
+        ;
         session.close();
     }
 }

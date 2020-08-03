@@ -12,8 +12,12 @@ import java.util.List;
 
 @Repository
 public class HashtagDaoImpl implements HashtagDao {
+    private final SessionFactory sessionFactory;
+
     @Autowired
-    private SessionFactory sessionFactory;
+    public HashtagDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public Hashtag save(Hashtag hashtag) {

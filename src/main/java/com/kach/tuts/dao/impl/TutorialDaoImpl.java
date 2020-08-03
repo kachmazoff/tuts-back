@@ -12,8 +12,12 @@ import java.util.List;
 
 @Repository
 public class TutorialDaoImpl implements TutorialDao {
+    private final SessionFactory sessionFactory;
+
     @Autowired
-    private SessionFactory sessionFactory;
+    public TutorialDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public Tutorial save(Tutorial tutorial) {
