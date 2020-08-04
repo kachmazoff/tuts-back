@@ -2,6 +2,7 @@ package com.kach.tuts.services.impl;
 
 
 import com.kach.tuts.dao.TutorialDao;
+import com.kach.tuts.domain.Hashtag;
 import com.kach.tuts.domain.Tutorial;
 import com.kach.tuts.services.TutorialService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,4 +43,7 @@ public class TutorialServiceImpl implements TutorialService {
     public void delete(Tutorial hashtag) {
         tutorialDao.delete(hashtag);
     }
+
+    @Override
+    public void setHashtag(Tutorial tutorial, Hashtag hashtag){ tutorialDao.setHashtag(tutorial,hashtag);}
 }

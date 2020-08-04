@@ -2,9 +2,8 @@ package com.kach.tuts.domain;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -22,6 +21,14 @@ public class Tutorial extends BaseEntity{
     @Column
     String description;
 
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "tutorial_hasgtag",
+            joinColumns = {@JoinColumn(name = "tutorial_id")},
+            inverseJoinColumns = {@JoinColumn(name = "hashtag_id")}
+    )
+    private List<Hashtag> hashtagList;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -34,5 +41,9 @@ public class Tutorial extends BaseEntity{
     @Override
     public int hashCode() {
         return Objects.hash(title, description);
+    }
+
+    public void setHashtag(Hashtag hashtag){
+        hashtagList.add(hashtag);
     }
 }

@@ -1,6 +1,7 @@
 package com.kach.tuts.dao.impl;
 
 import com.kach.tuts.dao.TutorialDao;
+import com.kach.tuts.domain.Hashtag;
 import com.kach.tuts.domain.Tutorial;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -64,6 +65,16 @@ public class TutorialDaoImpl implements TutorialDao {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.delete(tutorial);
+        transaction.commit();
+        session.close();
+    }
+
+    @Override
+    public void setHashtag(Tutorial tutorial, Hashtag hashtag){
+        Session session = this.sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        tutorial.setHashtag(hashtag);
+        session.saveOrUpdate(tutorial);
         transaction.commit();
         session.close();
     }
