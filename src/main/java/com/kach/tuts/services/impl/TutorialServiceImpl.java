@@ -11,10 +11,10 @@ import java.util.List;
 
 @Service
 public class TutorialServiceImpl implements TutorialService {
-    private TutorialDao tutorialDao;
+    private final TutorialDao tutorialDao;
 
     @Autowired
-    public void setHashtagDao(TutorialDao tutorialDao) {
+    public TutorialServiceImpl(TutorialDao tutorialDao) {
         this.tutorialDao = tutorialDao;
     }
 
