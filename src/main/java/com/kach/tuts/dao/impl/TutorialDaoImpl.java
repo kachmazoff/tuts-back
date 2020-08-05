@@ -70,10 +70,10 @@ public class TutorialDaoImpl implements TutorialDao {
     }
 
     @Override
-    public void setHashtag(Tutorial tutorial, Hashtag hashtag){
+    public void setHashtag(Tutorial tutorial, List<Hashtag> hashtags){
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        tutorial.setHashtagList(hashtag);
+        tutorial.setHashtagList(hashtags);
         session.saveOrUpdate(tutorial);
         transaction.commit();
         session.close();

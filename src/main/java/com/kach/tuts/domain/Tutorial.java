@@ -43,7 +43,5 @@ public class Tutorial extends BaseEntity{
         return Objects.hash(title, description);
     }
 
-    public void setHashtagList(Hashtag hashtag){
-        hashtagList.add(hashtag);
-    }
+    public void setHashtagList(List<Hashtag> hashtags){ hashtagList=hashtags; }
 }

@@ -45,5 +45,5 @@ public class TutorialServiceImpl implements TutorialService {
     }
 
     @Override
-    public void setHashtag(Tutorial tutorial, Hashtag hashtag){ tutorialDao.setHashtag(tutorial,hashtag);}
+    public void setHashtag(Tutorial tutorial, List<Hashtag> hashtags){ tutorialDao.setHashtag(tutorial,hashtags);}
 }
