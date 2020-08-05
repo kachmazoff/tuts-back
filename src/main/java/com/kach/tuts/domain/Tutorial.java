@@ -24,8 +24,8 @@ public class Tutorial extends BaseEntity{
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "tutorial_hasgtag",
-            joinColumns = {@JoinColumn(name = "tutorial_id")},
-            inverseJoinColumns = {@JoinColumn(name = "hashtag_id")}
+            joinColumns = {@JoinColumn(name = "tutorial_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "hashtag_id", referencedColumnName = "id")}
     )
     private List<Hashtag> hashtagList;
 
