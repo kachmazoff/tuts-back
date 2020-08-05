@@ -73,7 +73,7 @@ public class TutorialDaoImpl implements TutorialDao {
     public void setHashtag(Tutorial tutorial, Hashtag hashtag){
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        tutorial.setHashtag(hashtag);
+        tutorial.setHashtagList(hashtag);
         session.saveOrUpdate(tutorial);
         transaction.commit();
         session.close();
