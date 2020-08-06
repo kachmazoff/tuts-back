@@ -7,8 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Objects;
 
-@Getter
-@Setter
+@EqualsAndHashCode(callSuper = true)
+@Data
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -17,14 +17,4 @@ public class Hashtag extends BaseEntity {
     @NonNull
     @Column
     String name;
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(name);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
 }

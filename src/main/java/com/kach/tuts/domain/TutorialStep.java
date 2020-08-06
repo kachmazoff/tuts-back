@@ -13,9 +13,9 @@ import java.util.Objects;
 public class TutorialStep extends BaseEntity {
     @NonNull
     @Column
-    String title;
+    private String title;
 
     @NonNull
     @Column
-    String body;
+    private String body;
 }
