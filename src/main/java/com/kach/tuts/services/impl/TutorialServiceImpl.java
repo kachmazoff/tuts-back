@@ -3,6 +3,7 @@ package com.kach.tuts.services.impl;
 
 import com.kach.tuts.dao.TutorialDao;
 import com.kach.tuts.domain.Tutorial;
+import com.kach.tuts.domain.TutorialStep;
 import com.kach.tuts.services.TutorialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,20 @@ public class TutorialServiceImpl implements TutorialService {
     @Override
     public void delete(Tutorial hashtag) {
         tutorialDao.delete(hashtag);
+    }
+
+    @Override
+    public void setTutorialStepList(Tutorial tutorial, List<TutorialStep> tutorialStepList) {
+        this.tutorialDao.setTutorialStepList(tutorial, tutorialStepList);
+    }
+
+    @Override
+    public void addTutorialStep(Tutorial tutorial, TutorialStep tutorialStep) {
+        this.tutorialDao.addTutorialStep(tutorial, tutorialStep);
+    }
+
+    @Override
+    public void deleteTutorialStep(Tutorial tutorial, TutorialStep tutorialStep) {
+        this.tutorialDao.deleteTutorialStep(tutorial, tutorialStep);
     }
 }

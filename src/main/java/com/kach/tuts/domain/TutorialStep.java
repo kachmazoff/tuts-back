@@ -18,4 +18,7 @@ public class TutorialStep extends BaseEntity {
     @NonNull
     @Column
     private String body;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Tutorial tutorial;
 }
