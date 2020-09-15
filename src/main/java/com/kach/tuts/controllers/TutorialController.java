@@ -25,10 +25,16 @@ public class TutorialController {
     public ResponseEntity createNewTutorialDraft(@RequestBody Map<String, String> body) {
         Tutorial tutorial = new Tutorial();
         tutorial.setTitle(body.get("title"));
-        tutorial.setDescription(body.get("setDescription"));
+        tutorial.setDescription(body.get("description"));
 
         tutorialService.save(tutorial);
 
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteTutorial(@PathVariable("id") Long id) {
+        tutorialService.delete(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 }
