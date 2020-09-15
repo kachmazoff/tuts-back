@@ -1,6 +1,8 @@
 package com.kach.tuts.services.impl;
 
+import com.kach.tuts.dto.TutorialStepDTO;
 import com.kach.tuts.models.EntityStatus;
+import com.kach.tuts.models.Tutorial;
 import com.kach.tuts.models.TutorialStep;
 import com.kach.tuts.repositories.TutorialStepRepository;
 import com.kach.tuts.services.TutorialStepService;
@@ -55,8 +57,20 @@ public class TutorialStepServiceImpl implements TutorialStepService {
     }
 
     @Override
-    public void create(String title, String body) {
+    public TutorialStep create(String title, String body) {
         TutorialStep tutorialStep = new TutorialStep(title, body);
-        tutorialStepRepository.save(tutorialStep);
+        return tutorialStepRepository.save(tutorialStep);
+    }
+
+    @Override
+    public TutorialStep create(Tutorial tutorial, TutorialStepDTO tutorialStepDTO) {
+        TutorialStep tutorialStep = new TutorialStep();
+
+        tutorialStep.setTitle(tutorialStepDTO.getTitle());
+        tutorialStep.setBody(tutorialStepDTO.getBody());
+        tutorialStep.setOrderNumber(tutorialStepDTO.getIndex());
+        tutorialStep.setTutorial(tutorial);
+
+        return tutorialStepRepository.save(tutorialStep);
     }
 }

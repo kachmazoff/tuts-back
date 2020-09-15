@@ -3,10 +3,9 @@ package com.kach.tuts.models;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -27,6 +26,9 @@ public class Tutorial extends BaseEntity {
     @NotNull
     @Column(columnDefinition = "boolean default true")
     Boolean isPublic = true;
+
+    @OneToMany(mappedBy = "tutorial", fetch = FetchType.LAZY)
+    private List<TutorialStep> steps;
 
     public Tutorial(String title, String description) {
         this.title = title;
