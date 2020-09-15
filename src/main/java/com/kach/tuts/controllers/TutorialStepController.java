@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/steps")
+@RequestMapping("/api/steps")
 public class TutorialStepController {
     @Autowired
     TutorialStepService tutorialStepService;
