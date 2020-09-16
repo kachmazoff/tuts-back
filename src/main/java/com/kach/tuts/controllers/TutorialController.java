@@ -71,6 +71,12 @@ public class TutorialController {
         return createdTutorial;
     }
 
+    @GetMapping("/{id}")
+    public TutorialPreviewDTO getTutorial(@PathVariable("id") Long id) {
+        Tutorial tutorial = tutorialService.getById(id);
+        return new TutorialPreviewDTO(tutorial);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deleteTutorial(@PathVariable("id") Long id) {
         tutorialService.delete(id);

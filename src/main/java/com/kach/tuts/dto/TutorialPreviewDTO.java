@@ -1,5 +1,6 @@
 package com.kach.tuts.dto;
 
+import com.kach.tuts.models.Tutorial;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,12 @@ public class TutorialPreviewDTO {
     Boolean isDraft;
     Boolean isPublic;
     Integer stepsCount;
+
+    public TutorialPreviewDTO(Tutorial tutorial) {
+        this.id = tutorial.getId();
+        this.title = tutorial.getTitle();
+        this.description = tutorial.getDescription();
+        this.isDraft = tutorial.getIsDraft();
+        this.isPublic = tutorial.getIsPublic();
+    }
 }

@@ -12,8 +12,9 @@ import java.util.Date;
 @Data
 @MappedSuperclass
 public abstract class BaseEntity {
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(updatable = false, nullable = false, unique=true)
     private Long id;
 
