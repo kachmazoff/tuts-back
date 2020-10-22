@@ -1,7 +1,6 @@
-package com.kach.tuts.domain;
+package com.kach.tuts.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,12 +9,12 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.util.Date;
 
-@Getter
-@Setter
+@Data
 @MappedSuperclass
-public class BaseEntity {
+public abstract class BaseEntity {
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(updatable = false, nullable = false, unique=true)
     private Long id;
 
