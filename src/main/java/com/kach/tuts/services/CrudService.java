@@ -8,4 +8,5 @@ public interface CrudService<T> {
     T getById(Long id);
     List<T> getAll();
     void delete(T t);
+    void delete(Long id);
 }
