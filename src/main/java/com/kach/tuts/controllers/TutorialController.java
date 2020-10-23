@@ -77,7 +77,6 @@ public class TutorialController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/{id}")
     public TutorialPreviewDTO getTutorial(@PathVariable("id") Long id) {
-        System.out.println("getTutorial");
         Tutorial tutorial = tutorialService.getById(id);
         return new TutorialPreviewDTO(tutorial);
     }
@@ -90,7 +89,6 @@ public class TutorialController {
 
     @GetMapping("/{id}/steps")
     public List<TutorialStepDTO> getTutorialSteps(@PathVariable("id") Long tutorialId) {
-        System.out.println("getTutorialSteps");
         return tutorialService.getStepsOfTutorial(tutorialId);
     }
 
