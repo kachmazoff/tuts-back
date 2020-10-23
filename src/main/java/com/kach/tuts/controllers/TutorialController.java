@@ -9,6 +9,9 @@ import com.kach.tuts.services.TutorialStepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -71,8 +74,10 @@ public class TutorialController {
         return createdTutorial;
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/{id}")
     public TutorialPreviewDTO getTutorial(@PathVariable("id") Long id) {
+        System.out.println("getTutorial");
         Tutorial tutorial = tutorialService.getById(id);
         return new TutorialPreviewDTO(tutorial);
     }
@@ -85,6 +90,7 @@ public class TutorialController {
 
     @GetMapping("/{id}/steps")
     public List<TutorialStepDTO> getTutorialSteps(@PathVariable("id") Long tutorialId) {
+        System.out.println("getTutorialSteps");
         return tutorialService.getStepsOfTutorial(tutorialId);
     }
 
