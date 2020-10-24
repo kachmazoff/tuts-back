@@ -27,6 +27,11 @@ public class Tutorial extends BaseEntity {
     @Column(columnDefinition = "boolean default true")
     Boolean isPublic = true;
 
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "author_id")
+    User author;
+
     @OneToMany(mappedBy = "tutorial", fetch = FetchType.LAZY)
     private List<TutorialStep> steps;
 
