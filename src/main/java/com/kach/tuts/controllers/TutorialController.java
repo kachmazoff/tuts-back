@@ -4,11 +4,16 @@ import com.kach.tuts.dto.TutorialPreviewDTO;
 import com.kach.tuts.dto.TutorialStepDTO;
 import com.kach.tuts.models.Tutorial;
 import com.kach.tuts.models.TutorialStep;
+import com.kach.tuts.models.User;
+import com.kach.tuts.services.AuthService;
 import com.kach.tuts.services.TutorialService;
 import com.kach.tuts.services.TutorialStepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,30 +29,25 @@ public class TutorialController {
     @Autowired
     TutorialStepService tutorialStepService;
 
+    @Autowired
+    AuthService authService;
+
     @GetMapping
     public List<TutorialPreviewDTO> getAllTutorials() {
         List<TutorialPreviewDTO> tutorialPreviewDTOList = new ArrayList<>();
-        tutorialService.getAll()
-                .forEach(tutorial -> {
-                    tutorialPreviewDTOList.add(
-                            new TutorialPreviewDTO(
-                                    tutorial.getId(),
-                                    tutorial.getTitle(),
-                                    tutorial.getDescription(),
-                                    tutorial.getIsDraft(),
-                                    tutorial.getIsPublic(),
-                                    tutorial.getSteps().size()
-                            )
-                    );
-                });
+        tutorialService.getAll().forEach(tutorial -> { tutorialPreviewDTOList.add(new TutorialPreviewDTO(tutorial)); });
         return tutorialPreviewDTOList;
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping
-    public Tutorial createNewTutorialDraft(@RequestBody Map<String, Object> body) {
+    public TutorialPreviewDTO createNewTutorialDraft(@RequestBody Map<String, Object> body) {
+        User author = authService.getActiveUser();
+
         Tutorial tutorial = new Tutorial();
         tutorial.setTitle((String) body.get("title"));
         tutorial.setDescription((String) body.get("description"));
+        tutorial.setAuthor(author);
 
         if (body.containsKey("steps")) {
             List<TutorialStepDTO> steps = (List<TutorialStepDTO>) body.get("steps");
@@ -68,7 +68,7 @@ public class TutorialController {
 
 
         Tutorial createdTutorial = tutorialService.save(tutorial);
-        return createdTutorial;
+        return new TutorialPreviewDTO(createdTutorial);
     }
 
     @GetMapping("/{id}")
