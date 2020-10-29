@@ -27,13 +27,9 @@ public class ProfileController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping
-    public ResponseEntity<Map<String, String>> getProfileData() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        Map<String, String> result = new HashMap<>();
-        result.put("username", authentication.getName());
-
-        return ResponseEntity.ok(result);
+    public ResponseEntity<UserDTO> getProfileData() {
+        User user = authService.getActiveUser();
+        return ResponseEntity.ok(new UserDTO(user));
     }
 
     @PreAuthorize("isAuthenticated()")
