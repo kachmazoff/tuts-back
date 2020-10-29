@@ -30,6 +30,12 @@ public class User extends BaseEntity implements UserDetails {
     @NotEmpty
     private String password;
 
+    private String firstName;
+
+    private String lastName;
+
+    private String patronymic;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();

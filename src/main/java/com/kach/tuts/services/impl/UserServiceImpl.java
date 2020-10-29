@@ -1,5 +1,6 @@
 package com.kach.tuts.services.impl;
 
+import com.kach.tuts.dto.UserDTO;
 import com.kach.tuts.models.User;
 import com.kach.tuts.repositories.UserRepository;
 import com.kach.tuts.services.UserService;
@@ -43,5 +44,14 @@ public class UserServiceImpl implements UserService {
     public void changePassword(String username, String oldPassword, String newPassword) {
         // TODO:
         throw new UnsupportedOperationException("Not implemented, yet");
+    }
+
+    @Override
+    public void updateProfileData(User user, UserDTO dto) {
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
+        user.setPatronymic(dto.getPatronymic());
+
+        userRepository.save(user);
     }
 }

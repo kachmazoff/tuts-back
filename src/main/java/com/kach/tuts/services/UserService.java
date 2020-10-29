@@ -1,5 +1,6 @@
 package com.kach.tuts.services;
 
+import com.kach.tuts.dto.UserDTO;
 import com.kach.tuts.models.User;
 
 public interface UserService {
@@ -35,4 +36,10 @@ public interface UserService {
      * @param newPassword Новый пароль
      */
     void changePassword(String username, String oldPassword, String newPassword);
+
+    /**
+     * Обновление данных о пользователе (ФИО)
+     * @param dto
+     */
+    void updateProfileData(User user, UserDTO dto);
 }
